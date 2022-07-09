@@ -64,7 +64,7 @@ struct ContentView: View {
 }
 ```
 
-El resultado es la siguiente imagen:
+El resultado es el siguiente:
 
 <img src="imagenes/hello-world-swiftui.png" width="200px"/>
 
