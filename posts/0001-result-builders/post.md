@@ -43,7 +43,7 @@ decir, la mejor forma de aprender algo es tratando de explicarlo.
 
 ## Objetivo de los result builders ##
 
-Si vemos un ejemplo sencillo de código en SwiftUI comprobaremos que
+Si vemos un ejemplo sencillo de código SwiftUI comprobaremos que
 podemos identificarlo como código Swift, pero que hay algo que no
 encaja del todo. Por ejemplo, el siguiente
 código construye una vista en la que se apilan verticalmente una
