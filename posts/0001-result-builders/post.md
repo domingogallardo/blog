@@ -8,7 +8,7 @@
 
 Desde que Apple presentó
 [_SwiftUI_](https://developer.apple.com/documentation/swiftui/) en la
-WWDC19 he querido entender las funcionalidades de Swift en las que se
+[WWDC19](https://developer.apple.com/wwdc19/204) he querido entender las funcionalidades de Swift en las que se
 basaba esta tecnología. Leí [algún que otro
 post](https://www.swiftbysundell.com/articles/the-swift-51-features-that-power-swiftuis-api/)
 que entraba en el tema y me quedé con la idea de que en Swift 5.1
