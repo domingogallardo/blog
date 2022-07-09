@@ -8,8 +8,8 @@
 
 Desde que Apple presentó
 [_SwiftUI_](https://developer.apple.com/documentation/swiftui/) en la
-[WWDC19](https://developer.apple.com/wwdc19/204) he querido entender las funcionalidades de Swift en las que se
-basaba esta tecnología. Leí [algún que otro
+[WWDC19](https://developer.apple.com/wwdc19/204) he querido entender
+las funcionalidades de Swift sobre las que se construye esta tecnología. Leí [algún que otro
 post](https://www.swiftbysundell.com/articles/the-swift-51-features-that-power-swiftuis-api/)
 que entraba en el tema y me quedé con la idea de que en Swift 5.1
 habían introducido algo llamado _function builders_ que era la
