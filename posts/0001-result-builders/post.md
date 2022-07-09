@@ -1,6 +1,6 @@
 <!--
 ** Title: Result builders en Swift
-** Date: 08/07/2022
+** Date: 
 ** Tags: Swift, Lenguajes de programación
 -->
 
