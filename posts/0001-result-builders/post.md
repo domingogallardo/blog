@@ -35,11 +35,11 @@ en octubre de 2020 y publicada en el lenguaje en la [versión
 de 2021.
 
 Más de un año después me he puesto realmente a estudiar los _result
-builders_ y a intentar entender cómo funcionan. Después de pasar
-unos días leyendo documentación, creando algunas notas en Obsidian y
+builders_ y a intentar entender cómo funcionan. Después de pasar unos
+días leyendo documentación, creando algunas notas en Obsidian y
 probando código ha llegado el momento de intentar poner en orden todo
-y tratar de explicar lo que he entendido. La mejor forma de aprender
-algo es explicándolo.
+y hacer un post sobre el tema. Como se suele decir, la
+mejor forma de aprender algo es tratando de explicarlo.
 
 ## Objetivo de los result builders ##
 
