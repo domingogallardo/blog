@@ -44,7 +44,7 @@ decir, la mejor forma de aprender algo es tratando de explicarlo.
 ## Objetivo de los _result builders_ ##
 
 Vamos a empezar explicando cuál es el objetivo de los _result
-builders_ y después explicaremos cómo funciona.
+builders_ y después explicaremos cómo funcionan.
 
 ### Un ejemplo con SwiftUI ###
 
@@ -92,13 +92,14 @@ Las llaves después de `VStack` definen una clausura que se le pasa al
 incializador. Si miramos en ella veremos que hay algo raro: hay dos
 sentencias que construyen una instancia de `Image` y otra instancia de
 `Text`. Son precisamente la imagen y el texto que se apilan y que se
-muestran en la vista resultante. ¿Cómo se pasan las instancias de
-`Image` y `Text` al `Vstack`? ¿Dónde está el return de la
+muestran en la vista resultante. Pero no se hace nada con esas
+instancias. ¿Cómo se pasan al `Vstack`? ¿Dónde está el return de la
 clausura?. ¿Qué magia es esta?
 
-La explicación está en el _result builder_. Esta funcionalidad realiza
-una transformación en tiempo de compilación del código anterior (que
-no es código Swift correcto) en un código similar al siguiente:
+La explicación está en que SwiftUI define un _result builder_ que
+realiza una transformación en tiempo de compilación del código
+anterior (que no es código Swift correcto) en un código similar al
+siguiente:
 
 ```swift
 VStack {
@@ -114,6 +115,12 @@ Este código sí que es código correcto de Swift. Las instancias creadas
 de `Image` y de `Text` se guardan en dos variables auxiliares y se
 llama a una función estática (`ViewBuilder.buildBlock`) que recibe
 estas dos vistas y las combina en una estructura que se devuelve.
+
+Aunque no lo hemos visto en el ejemplo, también sería posible construir
+los elementos constituyentes de forma recursiva usando el mismo
+DSL. Por ejemplo, uno de los elementos que se pasan al `VStack` podría
+ser a su vez otro `VStack` en el que se hubieran combinado otros
+elementos básicos.
 
 
 ### Creación de DSLs ###
@@ -131,14 +138,8 @@ DSL (_Domain Specific Language_). En este caso, el DSL nos permite
 construir vistas de _SwiftUI_, describiendo y combinando sus elementos
 constituyentes.
 
-Aunque no lo hemos visto en el ejemplo, también es posible construir
-los elementos constituyentes de forma recursiva usando el mismo
-DSL. Por ejemplo, uno de los elementos que se pasan al `VStack` podría
-ser a su vez otro `VStack` en el que se hubieran combinado otros
-elementos básicos.
-
 Los _result builders_ no solo se han utilizado para construir SwiftUI,
-sino que la comunidad ha creado una gran [lista nde
+sino que la comunidad ha creado una gran [cantidad de
 DSLs](https://github.com/carson-katri/awesome-result-builders) para
 definir todo tipo de elementos, como HTML, CSS, grafos, funciones
 REST o tests. Incluso en la reciente WWDC22 se ha presentado un DSL
