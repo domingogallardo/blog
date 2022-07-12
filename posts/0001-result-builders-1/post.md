@@ -4,7 +4,7 @@
 ** Tags: Swift, Lenguajes de programación
 -->
 
-# Result builders en Swift (1)#
+# Result builders en Swift (1) #
 
 Desde que Apple presentó
 [_SwiftUI_](https://developer.apple.com/documentation/swiftui/) en la
