@@ -156,10 +156,10 @@ funcionalidad en el lenguaje Swift.
 ## Primer ejemplo ##
 
 En primer lugar, para definir un _result builder_ debemos especificar
-una función `buildBlock`. Esta función es la que encarga de construir
-un resultado a partir de unos elementos. En el caso del ejemplo
-anterior se debe construir una composición de dos vistas a partir de
-las vistas individuales (la instancia de `Image` y de `Text`).
+una función `buildBlock` que construya un resultado a partir de unos
+elementos. En el caso del ejemplo anterior se debe construir una
+composición de dos vistas a partir de las vistas individuales (la
+instancia de `Image` y de `Text`).
 
 ¿Cómo podemos definir esta función? La forma más sencilla es definir
 una función estática, a la que se pueda llamar sin necesidad de crear
@@ -169,7 +169,7 @@ componente resultado de su composición. Podemos definirla en una
 estructura, una clase o un enumerado anotado con el atributo
 `@resultBuilder`.
 
-Un ejemplo muy sencillo es el siguiente:
+Un ejemplo muy sencillo que trabaja con cadenas es el siguiente:
 
 ```swift
 @resultBuilder
@@ -256,11 +256,13 @@ struct StringConcatenator {
 ```
 
 Ahora la función `buildBlock` recibe un número variable de cadenas
-guardadas en el array `components`. Devuelve el resultado de
-concatenar todas las cadenas uniéndolas con una coma y un espacio.
+guardadas en el array `components`. Y la función de orden superior
+`joined` recorre el array de cadenas y las une todas con una coma y un
+espacio.
 
-Podemos entonces usar las cadenas que queramos en el DSL. Por ejemplo,
-podemos definir un saludo de la siguiente forma:
+Con este `buildBlock` podemos componer el número de cadenas que
+queramos en el DSL. Por ejemplo, podemos definir un saludo a partir de
+cuatro cadenas:
 
 ```swift
 @StringConcatenator
@@ -272,7 +274,12 @@ func saludo(nombre: String) -> String {
 }
 ```
 
-El _result builder_ transforma el código anterior en:
+Además, en este ejemplo, hemos añadido un parámetro `nombre` a la
+función. Este parámetro permite especificar el nombre que está
+saludando.
+
+El _result builder_ `@StringConcatenator` transforma el código
+anterior en:
 
 ```swift
 func saludo(nombre: String) -> String {
@@ -300,7 +307,7 @@ Hola, me, llamo, Frodo
 
 Según la [documentación
 oficial](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
-de Swift, podemos usar el atributo del _result builder_ creado en los
+de Swift, podemos usar el atributo del _result builder_ en los
 siguientes lugares:
 
 - En la declaración de una función, y el _result builder_ construye el
@@ -333,14 +340,19 @@ let frodo = Persona(nombre: "Frodo")
 print(frodo.saludo)
 ```
 
-El código anterior imprime el mismo saludo:
+Ahora el DSL se utiliza para definir el _getter_ de la variable
+calculada `saludo`. El _result builder_ transforma ese _getter_ de la
+misma forma que en los ejemplos anteriores, creando un _getter_ que
+devuelve una cadena a partir de las cadenas que aparecen en las
+distintas sentencias del código original.
+
+La instrucción `let` crea una instancia de `Persona` inicializando su
+nombre. Y la siguiente sentencia llama a la variable calculada, que
+devuelve la cadena con el saludo, y la imprime:
 
 ```text
 Hola, me, llamo, Frodo
 ```
-
-En este caso el _result builder_ transforma el cuerpo del _getter_ que
-devuelve el saludo de la persona.
 
 ## DSL en parámetros ##
 
@@ -358,8 +370,8 @@ func imprimeSaludo(@StringConcatenator _ contenido: () -> String) {
 Estamos definiendo una función que va a recibir una clausura sin
 argumentos que va a devolver una cadena. En el cuerpo de la función se
 ejecuta la clausura y se imprime el resultado. La anotación
-`@StringConcatenator` establece que vamos a poder pasar clausuras DSL
-como argumento y que esas clausuras serán transformadas por el _result
+`@StringConcatenator` establece que podremos pasar como argumento
+clausuras DSL y que esas clausuras serán transformadas por el _result
 builder_.
 
 De esta forma, podemos llamar a la función anterior usando una
@@ -466,4 +478,4 @@ tan potente.
 - [Proposal en Swift Evolution](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) 
 - [Introducción en la Guía de Swift](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html#ID630)
 - [Explicación detallada en Language Reference](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
-
+- [Código fuente del post](code/result-builders.swift)
