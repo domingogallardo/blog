@@ -418,12 +418,12 @@ hemos visto una pequeña parte de todo lo que permiten hacer los
 _result builders_.
 
 Si vemos un ejemplo avanzado de SwiftUI veremos que el _result
-builder_ definido (la estructura
-[ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder)
-permite un DSL mucho más avanzado, permitiendo para la construcción de
-la vista el uso de bucles (`ForEach`) y condicionales (`if`).
+builder_ definido en SwiftUI (la estructura
+[ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder))
+permite un DSL mucho más avanzado, en el que podemos usar bucles
+(`ForEach`) y condicionales (`if`).
 
-El siguiente ejemplo está sacado del artículo de _Hacking with Swift_
+Ejemplo del artículo de _Hacking with Swift_
 [List Items Inside if
 Statements](https://www.hackingwithswift.com/forums/swiftui/list-items-inside-if-statements/1627):
 
