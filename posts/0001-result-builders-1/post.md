@@ -1,6 +1,6 @@
 <!--
-** Title: Result builders en Swift
-** Date: 
+** Title: Result builders en Swift (1)
+** Date: 12/07/2022
 ** Tags: Swift, Lenguajes de programación
 -->
 
@@ -154,8 +154,6 @@ funcionalidad en el lenguaje Swift.
 
 ## Primer ejemplo ##
 
-Vamos a definir un _result builder_ que 
-
 En primer lugar, para definir un _result builder_ debemos especificar
 una función `buildBlock`. Esta función es la que encarga de construir
 un resultado a partir de unos elementos. En el caso del ejemplo
@@ -195,7 +193,7 @@ interese aplicarlo.
 
 Por ejemplo, podemos escribir el siguiente código:
 
-```
+```swift
 @StringConcatenator
 func holaMundo() -> String {
     "Hola"
@@ -205,23 +203,28 @@ func holaMundo() -> String {
 print(holaMundo())
 ```
 
-Estamos definiendo una función cuyo cuerpo va a ser transformado por
-el _result builder_ `StringConcatenator` en tiempo de compilación. En
-la transformación se va a llamar a la función constructora del _result
-builder_ pasando como argumentos los componentes `"Hola"` y
-`"mundo"`. Y la función constructora devolverá la composición de ambas
-cadenas, que se será lo que devuelva la función `holaMundo()`.
-
-De esta forma, el código anterior imprimirá:
+La función `holaMundo()` no sería correcta en Swift porque no tiene
+ningún `return` con la cadena a devolver. Además, sus dos sentencias
+no hacen nada, solo definir las cadenas `"Hola"` y `"mundo"`. Pero si
+ejecutamos el código anterior veremos que el compilador no da ningún
+error y que el código se ejecuta correctamente e imprime el típico
+mensaje:
 
 ```text
 Hola, mundo
 ```
 
-¿Qué está haciendo internamente el compilador? Al encontrar el
-atributo `@StringConcatenator` en la declaración de la función el
-compilador entiende que el cuerpo de la función es un DSL que debe
-transformar. El código resultante es el siguiente:
+¿Qué está pasando? Al utilizar el atributo `@StringConcatenator` en la
+función `holaMundo()` estamos declarando que se trata de una función
+cuyo cuerpo lo estamos definiendo con un DSL que va a procesar el
+_result builder_ `StringConcatenator`.
+
+Al igual que en el ejemplo anterior de `SwiftUI`, cada sentencia del
+cuerpo de la función especifica un componente que el compilador debe
+procesar. En este caso son cadenas. Y al final se debe llamar a
+`buildBlock` para combinar estos componentes y devolver la cadena resultante.
+En concreto, el código resultante de la transformación es
+el siguiente:
 
 ```swift
 func holaMundo() -> String {
@@ -231,8 +234,235 @@ func holaMundo() -> String {
 }
 ```
 
-Cada sentencia del cuerpo de la función a transformar especifica un
-componente que el compilador debe procesar. En este caso lo único que
-hace es asignar esos componentes a variables auxiliares. Y al final
-del código se debe terminar llamando a `buildBlock` para combinar esos
-componentes. 
+Este código transformado es el que se ejecuta finalmente en el
+programa y el que devuelve la cadena `"Hola, mundo"`.
+
+### Número variable de argumentos ###
+
+En el ejemplo anterior la función `buildBlock` está definida
+únicamente sobre dos argumentos. No funcionaría si quisiéramos
+construir una cadena con más de dos componentes. Podemos mejorarla
+usando la capacidad de Swift de definir funciones con un número
+variable de argumentos:
+
+```swift
+@resultBuilder
+struct StringConcatenator {
+    static func buildBlock(_ components: String...) -> String {
+        return components.joined(separator: ", ")
+    }
+}
+```
+
+Ahora la función `buildBlock` recibe un número variable de cadenas
+guardadas en el array `components`. Devuelve el resultado de
+concatenar todas las cadenas uniéndolas con una coma y un espacio.
+
+Podemos entonces usar las cadenas que queramos en el DSL. Por ejemplo,
+podemos definir un saludo de la siguiente forma:
+
+```swift
+@StringConcatenator
+func saludo(nombre: String) -> String {
+    "Hola"
+    "me"
+    "llamo"
+    nombre
+}
+```
+
+El _result builder_ transforma el código anterior en:
+
+```swift
+func saludo(nombre: String) -> String {
+    let v0 = "Hola"
+    let v1 = "me"
+    let v2 = "llamo"
+    let v3 = nombre
+    return StringConcatenator.buildBlock(v0, v1, v2, v3)
+}
+```
+
+Si llamamos a la función original
+
+```swift
+print(saludo(nombre: "Frodo"))
+```
+
+se imprimirá lo siguiente:
+
+```text
+Hola, me, llamo, Frodo
+```
+
+## DSL en variables calculadas ##
+
+Según la [documentación
+oficial](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
+de Swift, podemos usar el atributo del _result builder_ creado en los
+siguientes lugares:
+
+- En la declaración de una función, y el _result builder_ construye el
+  cuerpo de la función.
+- En una declaración de variable que incluye un _getter_, y el _result
+  builder_ construye el cuerpo del _getter_.
+- En un parámetro de tipo clausura de una declaración de una función,
+  y el _result builder_ construye el cuerpo de la clausura que se pasa
+  al argumento correspondiente.
+  
+El primer caso lo hemos visto en el apartado anterior. Vamos a ver un
+ejemplo del segundo caso.
+
+Por ejemplo, podemos definir la siguiente estructura:
+
+```swift
+struct Persona {
+    let nombre: String
+
+    @StringConcatenator
+    var saludo: String {
+        "Hola"
+        "me"
+        "llamo"
+        nombre
+    }
+}
+
+let frodo = Persona(nombre: "Frodo")
+print(frodo.saludo)
+```
+
+El código anterior imprime el mismo saludo:
+
+```text
+Hola, me, llamo, Frodo
+```
+
+En este caso el _result builder_ transforma el cuerpo del _getter_ que
+devuelve el saludo de la persona.
+
+## DSL en parámetros ##
+
+En la especificación de cómo usar el atributo del _result builder_ se
+menciona en último lugar la posibilidad de usarlo en un parámetro de
+tipo clausura. Veamos un ejemplo:
+
+```swift
+func imprimeSaludo(@StringConcatenator _ contenido: () -> String) {
+    let resultado = contenido()
+    print(resultado)
+}
+```
+
+Estamos definiendo una función que va a recibir una clausura sin
+argumentos que va a devolver una cadena. En el cuerpo de la función se
+ejecuta la clausura y se imprime el resultado. La anotación
+`@StringConcatenator` establece que vamos a poder pasar clausuras DSL
+como argumento y que esas clausuras serán transformadas por el _result
+builder_.
+
+De esta forma, podemos llamar a la función anterior usando una
+clausura en la que definimos las cadenas que van a aparecer en el
+saludo. Y además podemos hacerlo sin usar el atributo
+`@StringConcatenator` (ya se ha definido en el parámetro de la función):
+
+```
+imprimeSaludo {
+    "Hola"
+    "mundo"
+}
+```
+
+El código anterior imprime:
+
+```text
+Hola, mundo
+```
+
+Veamos con más detalle cómo funciona el ejemplo. La función
+`imprimeSaludo` recibe como parámetro la clausura `contenido`. Se
+trata de una clausura sin parámetros que devuelve una cadena. Y está
+precedido del atributo `@StringConcatenator`. Esto hace que cualquier
+argumento que se pase (una clausura que devuelve una cadena) sea
+transformado por el _result builder_.
+
+En la llamada a la función vemos que se utiliza la característica de
+Swift de la clausura al final, mediante la que se pueden omitir los
+paréntesis cuando el último argumento es una clausura.
+
+El código final generado por el compilador es el siguiente:
+
+```swift
+imprimeSaludo({
+    let v0 = "Hola"
+    let v1 = "mundo"
+    return StringConcatenator.buildBlock(v0, v1)
+})
+```
+
+Evidentemente, este código es mucho menos claro y directo que el
+código anterior: 
+
+```
+imprimeSaludo {
+    "Hola"
+    "mundo"
+}
+```
+
+## DSLs avanzados ##
+
+En los ejemplos anteriores hemos visto cómo se puede usar un DSL para
+construir un componente a partir de componentes elementales. Pero sólo
+hemos visto una pequeña parte de todo lo que permiten hacer los
+_result builders_.
+
+Si vemos un ejemplo avanzado de SwiftUI veremos que el _result
+builder_ definido (la estructura
+[ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder)
+permite un DSL mucho más avanzado, permitiendo para la construcción de
+la vista el uso de bucles (`ForEach`) y condicionales (`if`).
+
+El siguiente ejemplo está sacado del artículo de _Hacking with Swift_
+[List Items Inside if
+Statements](https://www.hackingwithswift.com/forums/swiftui/list-items-inside-if-statements/1627):
+
+```swift
+struct TestView: View {
+    ...
+    var body: some View {
+        List {
+            Button("Add a fresh potato") {
+                self.basket.vegetables.append(Vegetable(name: "Potato", freshness: 1))
+            }.foregroundColor(.blue)                        
+
+            Section(header: Text(sectionHeadings[0])) {
+                ForEach(self.basket.vegetables) { vegetable in
+                    if vegetable.freshness == 0 {
+                        Text(vegetable.name)
+                    }
+                }
+            }
+
+            Section(header: Text(sectionHeadings[1])) {
+                ForEach(self.basket.vegetables) { vegetable in
+                    if vegetable.freshness == 1 {
+                        Text(vegetable.name)
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+En próximos posts seguiremos explorando el funcionamiento de los
+_result builders_ y cómo utilizarlos para construir este tipo de DSL
+tan potente.
+
+## Referencias ##
+
+- [Proposal en Swift Evolution](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) 
+- [Introducción en la Guía de Swift](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html#ID630)
+- [Explicación detallada en Language Reference](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
+
