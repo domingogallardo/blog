@@ -478,4 +478,4 @@ tan potente.
 - [Proposal en Swift Evolution](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) 
 - [Introducción en la Guía de Swift](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html#ID630)
 - [Explicación detallada en Language Reference](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
-- [Código fuente del post](code/result-builders.swift)
+- [Fichero de código con los ejemplos del post](code/result-builders.swift)
