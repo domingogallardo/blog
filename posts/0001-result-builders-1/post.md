@@ -41,7 +41,7 @@ haciendo pruebas con código Swift ha llegado el momento de intentar
 poner en orden todo y hacer un post sobre el tema. Como se suele
 decir, la mejor forma de aprender algo es tratando de explicarlo.
 
-## Objetivo de los result builders ##
+## Objetivo de los _result builders_ ##
 
 Vamos a empezar explicando cuál es el objetivo de los _result
 builders_ y después explicaremos cómo funciona.
@@ -116,7 +116,7 @@ llama a una función estática (`ViewBuilder.buildBlock`) que recibe
 estas dos vistas y las combina en una estructura que se devuelve.
 
 
-### El objetivo de los _result builder_ ###
+### Creación de DSLs ###
 
 Mediante el _result builder_ anterior podemos entonces transformar el
 código limpio y claro del principio (que no funciona en Swift) en un
