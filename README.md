@@ -1,11 +1,10 @@
 # Blog de Domingo Gallardo
 
-Como la mejor forma de entender algo es intentar explicarlo, voy a
-empezar un blog sobre cosas que estoy aprendiendo de Swift. 
+Un blog sobre cosas que estoy aprendiendo de Swift. En el futuro iré
+incluyendo posts sobre otros temas en los que estoy interesado:
+programación, inteligencia artificial, libros que esté leyendo, etc.
 
-En el futuro iré incluyendo posts sobre otros temas en los que estoy
-interesado: programación, inteligencia artificial, libros que esté
-leyendo, etc.
+La mejor forma de entender algo es intentar explicarlo.
 
 ## Posts
 

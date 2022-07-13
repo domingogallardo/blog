@@ -38,8 +38,7 @@ Más de un año después me he puesto realmente a estudiar los _result
 builders_ y a intentar entender cómo funcionan. Después de pasar unos
 días leyendo documentación, creando algunas notas en Obsidian y
 haciendo pruebas con código Swift ha llegado el momento de intentar
-poner en orden todo y hacer un post sobre el tema. Como se suele
-decir, la mejor forma de aprender algo es tratando de explicarlo.
+poner en todo en orden y hacer un post sobre el tema.
 
 ## Objetivo de los _result builders_ ##
 
@@ -119,9 +118,8 @@ estas dos vistas y las combina en una estructura que se devuelve.
 Aunque no lo hemos visto en el ejemplo, también sería posible construir
 los elementos constituyentes de forma recursiva usando el mismo
 DSL. Por ejemplo, uno de los elementos que se pasan al `VStack` podría
-ser a su vez otro `VStack` en el que se hubieran combinado otros
+ser a su vez otro `VStack` formado por la combinación de otros
 elementos básicos.
-
 
 ### Creación de DSLs ###
 
