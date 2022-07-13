@@ -9,4 +9,4 @@ La mejor forma de entender algo es intentar explicarlo.
 ## Posts
 
 - [Result Builders en Swift (1)](posts/0001-result-builders-1/post.md)
-  publicado el 12 de julio de 2022
+  publicado el 12 de julio de 2022.
