@@ -312,7 +312,7 @@ static func buildFinalResult(_ component: Component) -> FinalResult
   tipo resultante.
 
 Estas funciones son opcionales. Si no las especificamos, el _result
-builder_ solo trabaja con el tipo _Componente_ tal y como hemos visto
+builder_ solo trabaja con el tipo _Component_ tal y como hemos visto
 en los ejemplos anteriores.
 
 Un ejemplo sencillo es el siguiente, en el que definimos un _result
