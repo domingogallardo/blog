@@ -104,7 +104,7 @@ explicación está en que ese atributo se ha usado en un parámetro de
 una función. En concreto en un parámetro del inicializador de
 `HStack`.
 
-Vamos a hacer nosotros algo similar.
+Vamos a hacer algo similar con el `StringConcatenator`.
 
 ### Ejemplo de _result builder_ en un inicializador  ###
 
