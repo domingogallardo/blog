@@ -124,7 +124,7 @@ struct Persona {
 }
 ```
 
-Estamos definiendo una estructura con una variable almacenada
+Estamos definiendo una estructura con una propiedad almacenada
 `contenido` que contiene una clausura sin parámetros que devuelve una
 cadena. Y una variable calculada `saludo` que devuelve la cadena
 resultante de ejecutar esa clausura.
