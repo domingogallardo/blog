@@ -115,7 +115,7 @@ struct Persona {
     let contenido: () -> String
 
     var saludo: String {
-p        contenido()
+        contenido()
     }
 
     init(@StringConcatenator contenido: @escaping () -> String) {
