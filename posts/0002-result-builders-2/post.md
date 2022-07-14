@@ -70,8 +70,7 @@ imprimeSaludo {
 ```
 
 En este segundo post a ver otros lugares en los que se puede usar el
-atributo del _result builder_ y vamos a conocer más cosas sobre su
-construcción, estudiando otros elementos que puede contener.
+atributo del _result builder_.
 
 ## Result builders en inicializadores ##
 
@@ -97,7 +96,7 @@ La vista construida es una pila horizontal con cinco subvistas de tipo
 <img src="imagenes/hstack.png" width="300px"/>
 
 Vemos que el `HStack` recibe una clausura con código DSL que
-especifica las subvistas. El _ViewBuilder_ transformará ese DSL en
+especifica las subvistas. El `ViewBuilder` transformará ese DSL en
 código Swift. 
 
 ¿Por qué no tenemos que usar el atributo `@ViewBuilder`?. La
@@ -107,7 +106,7 @@ una función. En concreto en un parámetro del inicializador de
 
 Vamos a hacer nosotros algo similar.
 
-### Ejemplo de _result builder_ en inicializador  ###
+### Ejemplo de _result builder_ en un inicializador  ###
 
 Supongamos la siguiente estructura `Persona`:
 
@@ -269,32 +268,5 @@ Hola, me, llamo, Gandalf
 ```
 
 
-## Expresiones, componentes y resultados finales ##
-
-```swift
-@resultBuilder
-struct ArrayBuilder {
-    static func buildExpression(_ expression: Int) -> [Int] {
-        return [expression]
-    }
-
-    static func buildBlock(_ components: [Int]...) -> [Int] {
-        return Array(components.joined())
-    }
-
-    static func buildFinalResult(_ component: [Int]) -> [Double] {
-        component.map {Double($0)}
-    }
-}
-
-@ArrayBuilder
-func buildArray() -> [Double] {
-    100
-    200
-    300
-}
-
-print(buildArray())
-```
-
 ## Referencias ##
+
