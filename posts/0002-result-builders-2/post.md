@@ -6,7 +6,7 @@
 
 # Result builders en Swift (2) #
 
-En el [post anterior](posts/0001-resultbuilders-1/post.md) de la serie
+En el [post anterior](../0001-resultbuilders-1/post.md) de la serie
 sobre _result builders_ vimos cómo éstos permiten utilizar un DSL para
 definir una clausura o un bloque de código que construye un componente
 a partir de componentes elementales.
