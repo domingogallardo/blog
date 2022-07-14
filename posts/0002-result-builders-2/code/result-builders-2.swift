@@ -65,7 +65,6 @@ let gandalf = PersonaEducada(nombre: "Gandalf")
 print(gandalf.saludo)
 // Imprime: Hola, me, llamo, Gandalf
 
-
 @resultBuilder
 struct ArrayBuilder {
     static func buildExpression(_ expression: Int) -> [Int] {
@@ -84,8 +83,9 @@ struct ArrayBuilder {
 @ArrayBuilder
 func buildArray() -> [Double] {
     100
-    200
-    300
+    100+100
+    (100+100)*2
 }
 
 print(buildArray())
+// Imprime [100.0, 200.0, 400.0]

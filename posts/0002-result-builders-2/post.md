@@ -1,6 +1,6 @@
 <!--
 ** Title: Result builders en Swift (2)
-** Date: 
+** Date: 14/07/2022
 ** Tags: Swift, Lenguajes de programación
 -->
 
@@ -85,7 +85,7 @@ let vista =
             1...5,
             id: \.self
         ){
-            Text("Item \($0)")
+            Text("Ítem \($0)")
         }
     }
 ```
@@ -115,7 +115,7 @@ struct Persona {
     let contenido: () -> String
 
     var saludo: String {
-        contenido()
+p        contenido()
     }
 
     init(@StringConcatenator contenido: @escaping () -> String) {
@@ -129,13 +129,14 @@ Estamos definiendo una estructura con una variable almacenada
 cadena. Y una variable calculada `saludo` que devuelve la cadena
 resultante de ejecutar esa clausura.
 
-Para inicializar una `Persona` con el método `init` debemos pasar como
-argumento la clausura que va a generar el saludo. En el método
-definimos ese parámetro con el atributo `@StringConcatenator` para
-indicar que vamos a pasar un argumento que debe ser transformado por
-el _result builder_. El atributo `@escaping` no es importante; tiene
-que ver con la forma de gestionar el ámbito de la clausura y el
-compilador da un error si no lo ponemos.
+Definimos también el inicializador de `Persona` con el parámetro que
+inicializa la propiedad `contenido`. Para construir una instancia de
+`Persona` debemos pasar como argumento la clausura que va a generar el
+saludo. Y añadimos a ese parámetro el atributo `@StringConcatenator`
+para indicar el argumento que pasemos debe ser transformado por el
+_result builder_. El atributo `@escaping` no es importante; tiene que
+ver con la forma de gestionar el ámbito de la clausura y el compilador
+da un error si no lo ponemos.
 
 Ahora ya podemos crear una instancia de `Persona` pasando una clausura
 que usa el DSL:
@@ -267,6 +268,110 @@ Como siempre, se imprimirá:
 Hola, me, llamo, Gandalf
 ```
 
+## Transformaciones más elaboradas ##
+
+Hasta ahora hemos visto cómo el _result builder_ construye un
+componente complejo a partir de componentes elementales usando la
+función estática `buildBlock`.
+
+El perfil de esta función es el siguiente:
+
+```swift
+static func buildBlock(_ components: Component...) -> Component
+```
+
+En el caso de los ejemplos anteriores el tipo componente es un
+`String` y la función `buildBlock` recibe un número variable de
+cadenas y construye la cadena resultante.
+
+Sin embargo, es posible que en ciertos DSLs tengamos que hacer algún
+tipo de transformación en los componentes iniciales. O aplicar una
+última transformación al valor resultante. Para tener este control más
+fino podemos especificar dos funciones adicionales en el _result
+builder_, las funciones `buildExpression` y `buildFinalResult`.
+
+El perfil de ambas funciones es el siguiente:
+
+```swift
+static func buildExpression(_ expression: Expression) -> Component
+static func buildFinalResult(_ component: Component) -> FinalResult
+```
+
+- La función `buildExpression(_ expression: Expression) -> Component`
+  se utiliza para transformar los resultados de las sentencias del
+  DSL, del tipo _Expression_ en el tipo resultante _Component_ que se
+  va a usar en el `buildBlock`. Permite que el tipo de las expresiones
+  que aparecen en el DSL sea distinto del tipo resultante.
+
+- La función `buildFinalResult(_ component: Component) -> FinalResult`
+  se usa para construir el resultado final que va a devolver el
+  _result builder_. Permite distinguir el tipo componente del tipo
+  resultado de forma que, por ejemplo, el _result builder_ podría
+  realizar transformaciones internas en un tipo que no queremos
+  exponer a los clientes y al final realizar una transformación al
+  tipo resultante.
+
+Estas funciones son opcionales. Si no las especificamos, el _result
+builder_ solo trabaja con el tipo _Componente_ tal y como hemos visto
+en los ejemplos anteriores.
+
+Un ejemplo sencillo es el siguiente, en el que definimos un _result
+builder_ que construye un array de números reales. Las expresiones que
+escribimos en el DSL son de números enteros.
+
+```swift
+@resultBuilder
+struct ArrayBuilder {
+    static func buildExpression(_ expression: Int) -> [Int] {
+        return [expression]
+    }
+
+    static func buildBlock(_ components: [Int]...) -> [Int] {
+        return Array(components.joined())
+    }
+
+    static func buildFinalResult(_ component: [Int]) -> [Double] {
+        component.map {Double($0)}
+    }
+}
+```
+
+La función `buildExpression` transforma el número entero original en
+un array con un único dato. En este caso el tipo _Expression_ es un
+`Int` y el tipo _Component_ resultante es un `[Int]`.
+
+La función `buildBlock` es la que une varios componentes (arrays de
+enteros de un elemento) en un resultado final, un array de enteros.
+
+Y la función `buildFinalBlock` transforma el componente resultante de
+la función anterior en el tipo _FinalResult_, un `[Double]`.
+
+Podemos ver un resultado del funcionamiento en el siguiente ejemplo:
+
+```swift
+@ArrayBuilder
+func buildArray() -> [Double] {
+    100
+    100+100
+    (100+100)*2
+}
+
+print(buildArray())
+```
+
+En el DSL que define el cuerpo de la función se escriben tres
+sentencias que devuelven enteros. Estas tres sentencias son las
+expresiones que va a tomar el _result builder_ para aplicar todas las
+transformaciones anteriores.
+
+El resultado final es el siguiente array de números reales:
+
+```text
+[100.0, 200.0, 400.0]
+```
 
 ## Referencias ##
 
+- [Propuesta en Swift Evolution](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) 
+- [Explicación detallada en Language Reference](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
+- [Fichero de código con los ejemplos del post](code/result-builders-2.swift)
