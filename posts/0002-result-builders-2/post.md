@@ -69,8 +69,8 @@ imprimeSaludo {
 // Imprime: Hola, mundo
 ```
 
-En este segundo post a ver otros lugares en los que se puede usar el
-atributo del _result builder_.
+En este segundo post vamos a ver otros lugares en los que se puede usar el
+atributo del _result builder_ y otras transformaciones que se pueden realizar.
 
 ## Result builders en inicializadores ##
 
