@@ -336,14 +336,14 @@ struct ArrayBuilder {
 }
 ```
 
-La función `buildExpression` transforma el número entero original en
+- La función `buildExpression` transforma el número entero original en
 un array con un único dato. En este caso el tipo _Expression_ es un
 `Int` y el tipo _Component_ resultante es un `[Int]`.
 
-La función `buildBlock` es la que une varios componentes (arrays de
+- La función `buildBlock` es la que une varios componentes (arrays de
 enteros de un elemento) en un resultado final, un array de enteros.
 
-Y la función `buildFinalBlock` transforma el componente resultante de
+- Y la función `buildFinalBlock` transforma el componente resultante de
 la función anterior en el tipo _FinalResult_, un `[Double]`.
 
 Podemos ver un resultado del funcionamiento en el siguiente ejemplo:
