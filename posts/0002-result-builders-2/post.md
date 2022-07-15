@@ -161,7 +161,7 @@ print(frodo.saludo)
 Se imprime:
 
 ```text
-Hola, me. llamo, Frodo
+Hola, me, llamo, Frodo
 ```
 
 ### Simplificando el inicializador ###
