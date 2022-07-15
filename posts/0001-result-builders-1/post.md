@@ -377,7 +377,7 @@ clausura en la que definimos las cadenas que van a aparecer en el
 saludo. Y además podemos hacerlo sin usar el atributo
 `@StringConcatenator` (ya se ha definido en el parámetro de la función):
 
-```
+```swift
 imprimeSaludo {
     "Hola"
     "mundo"
@@ -414,7 +414,7 @@ imprimeSaludo({
 Evidentemente, este código es mucho menos claro y directo que el
 código anterior: 
 
-```
+```swift
 imprimeSaludo {
     "Hola"
     "mundo"
