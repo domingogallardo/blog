@@ -372,6 +372,6 @@ El resultado final es el siguiente array de números reales:
 
 ## Referencias ##
 
-- [Propuesta en Swift Evolution](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) 
+- [Propuesta de Result Builders en Swift Evolution](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) 
 - [Explicación detallada en Language Reference](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID633)
 - [Fichero de código con los ejemplos del post](code/result-builders-2.swift)
