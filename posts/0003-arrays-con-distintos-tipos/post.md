@@ -1,6 +1,6 @@
 <!--
 ** Title: Arrays con distintos tipos de datos en Swift
-** Date: 
+** Date: 20/07/2022
 ** Tags: Swift, Lenguajes de programación
 -->
 
@@ -277,8 +277,10 @@ Esto nos lleva a la siguiente solución.
 
 ## Array de un tipo protocolo
 
-Otra solución, más flexible, para guardar tipos distintos en un
-array es usar un protocolo (o una super clase). 
+Otra solución, más flexible, para guardar tipos distintos en un array
+es usar un
+[protocolo](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html)
+(o una super clase).
 
 En general, si queremos agrupar varios ítems en una colección es
 porque todos ellos comparten alguna propiedad. Podemos especificar esa
@@ -376,4 +378,24 @@ Hola
 false
 ```
 
+## El problema de los genéricos
 
+La solución anterior de definir un protocolo para los componentes del
+array parece la solución perfecta. Permite flexibilidad y
+extensibilidad. Aunque no lo hemos visto en el ejemplo, permite
+también usar el _downcasting_ y obtener instancias del tipo concreto
+del dato usando una sentencia _switch_. 
+
+Pero hay un aspecto que no hemos contemplado. Una de las
+características más importantes de Swift es su apuesta por los tipos
+genéricos. Desde el comienzo del lenguaje se hizo una hoja de ruta, en
+forma de
+[manifiesto](https://github.com/apple/swift/blob/main/docs/GenericsManifesto.md),
+que se ha ido implementando en cada nueva versión del lenguaje.  
+
+¿Qué sucede entonces si como tipo del array usamos un protocolo
+genérico, un protocolo que tiene un _associated type_? 
+
+Pues resulta que todo se hace un poco más complicado. Bueno, no solo
+un poco, bastante más complicado. Pero mejor lo dejamos para otro
+post.
