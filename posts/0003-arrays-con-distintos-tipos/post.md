@@ -107,8 +107,10 @@ respuesta es que sí, aunque con ciertas limitaciones. Vamos a verlo.
 
 ## Tipo especial Any
 
-El tipo especial `Any` permite que la variable declarada sea de
-cualquier tipo. Por ejemplo, podemos decir: 
+El [tipo especial
+`Any`](https://docs.swift.org/swift-book/ReferenceManual/Types.html#ID629)
+permite que la variable declarada sea de cualquier tipo. Por ejemplo,
+podemos decir:
 
 ```swift
 var x: Any = 10
@@ -399,3 +401,23 @@ genérico, un protocolo que tiene un _associated type_?
 Pues resulta que todo se hace un poco más complicado. Bueno, no solo
 un poco, bastante más complicado. Pero mejor lo dejamos para otro
 post.
+
+
+## Referencias ##
+
+- [Arrays en Language
+  Guide](https://docs.swift.org/swift-book/LanguageGuide/CollectionTypes.html#ID107)
+- [Tipo Any en Language
+  Reference](https://docs.swift.org/swift-book/ReferenceManual/Types.html#ID629)
+- [Downcasting en Language
+  Guide](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html#ID341)
+- [Tipos
+enumerados en Language
+Guide](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html)
+- [Protocolos en Language Guide](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html)
+- [Tipos
+genéricos en Language
+Guide](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#)
+- [Generic
+  manifiesto](https://github.com/apple/swift/blob/main/docs/GenericsManifesto.md)
+- [Fichero de código con los ejemplos del post](code/array-multiples-tipos.swift)
