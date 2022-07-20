@@ -387,9 +387,9 @@ también usar el _downcasting_ y obtener instancias del tipo concreto
 del dato usando una sentencia _switch_. 
 
 Pero hay un aspecto que no hemos contemplado. Una de las
-características más importantes de Swift es su apuesta por los tipos
-genéricos. Desde el comienzo del lenguaje se hizo una hoja de ruta, en
-forma de
+características más importantes de Swift es su apuesta por los [tipos
+genéricos](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#). Desde
+el comienzo del lenguaje se hizo una hoja de ruta, en forma de
 [manifiesto](https://github.com/apple/swift/blob/main/docs/GenericsManifesto.md),
 que se ha ido implementando en cada nueva versión del lenguaje.  
 
