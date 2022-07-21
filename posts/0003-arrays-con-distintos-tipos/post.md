@@ -390,11 +390,8 @@ extension Double: Nombrable {
 }
 ```
 
-Con el código anterior estamos ampliando los tipos de Swift con la
-propiedad `nombre` y haciendo que todos ellos se ajusten al protocolo
-`Nombrable`.
-
-Y ahora podemos crear el array de cosas nombrables:
+Y ahora podemos crear el array de cosas nombrables y añadir en él
+instancias de los tipos anteriores:
 
 ```swift
 var miArray: [Nombrable] = [1, "Hola", 2.0]
