@@ -470,13 +470,13 @@ Apple](https://developer.apple.com/documentation/swiftui/view)).
 ¿Qué sucede entonces si como tipo del array usamos un protocolo
 genérico, un protocolo que tiene un _associated type_? ¿Qué sucede si
 creamos un array de vistas de SwiftUI? Pues resulta que todo se hace
-un poco más complicado. El compilador da un error. 
+un poco más complicado y el compilador da un error. 
 
 ```swift
 var array: [View] = []
 
-// Error: Protocol 'View' can only be used as a generic constraint because it has Self 
-// or associated type requirements
+// Error: Protocol 'View' can only be used as a generic constraint 
+// because it has Self or associated type requirements
 ```
 
 ¿Qué está pasando? Mejor lo dejamos para otro post, que este ya se ha
