@@ -6,9 +6,46 @@
 
 # Arrays con distintos tipos de datos en Swift
 
-Una pregunta curiosa: ¿es posible definir un array con datos de
-distintos tipos en un lenguaje fuertemente tipado como Swift? En
-principio parece contradictorio. Si hay que especificar de forma
+Investigando sobre SwiftUI y usándolo para entender mejor Swift una de
+las primeras cosas que llaman la atención es la palabra reservada
+`some`:
+
+```swift
+struct LandmarkRow: View {
+    var landmark: Landmark
+    
+    var body: some View {
+        HStack {
+            landmark.image
+                .resizable()
+                .frame(width: 50, height: 50)
+            Text(landmark.name)
+            Spacer()
+        }
+    }
+}
+```
+
+¿Qué significa en el código anterior que la variable `body` contiene
+_alguna_ vista?
+
+No sé si a vosotros os pasa, pero cuando intento entender algo nuevo
+siempre tengo la sensación de que estoy siguiendo las pistas de un
+caso por resolver, como si fuera una especie de Sherlock Holmes o
+Hercules Poirot. Una pregunta me lleva a otra y esta a otra, y así
+hasta que al final termino desenredando el ovillo (o parte de él) y
+conectando todos los conceptos nuevos que voy encontrando con los que
+ya conozco.
+
+Después, para explicarlo, toca hacer el camino en orden
+inverso. Partir de lo que ya conoces y llegar a partir de ahí a lo
+nuevo que quieres contar.
+
+En nuestro caso, el camino para entender `some` va a empezar con una
+pregunta curiosa: ¿es posible definir un array con datos de distintos
+tipos en un lenguaje fuertemente tipado como Swift? 
+
+En principio parece contradictorio. Si hay que especificar de forma
 estricta el tipo del array, debemos especificar el tipo de sus
 componentes:
 
@@ -17,16 +54,47 @@ var miArray: [Int] = []
 ```
 
 El tipo del array anterior es `[Int]`. O sea que todos sus elementos
-deben ser de tipo `Int`. 
+deben ser de tipo `Int`. Podríamos definir otros arrays distintos, con
+objetos de tipo `String` o de tipo `Double`. Pero en cada caso los
+arrays serían homogéneos y todos sus elementos tendrían el mismo tipo.
 
-¿Es siempre así en Swift? A priori parece demasiado rígido. Habrá
-veces en las que necesitemos una cierta variabilidad en el tipo de los
-elementos de un array. 
+¿Es siempre así en Swift? Parece demasiado rígido. Podría ser que
+necesitáramos guardar en un único array números enteros, cadenas y
+números reales. 
 
-Vamos a ver que un lenguaje moderno como Swift tiene estrategias como
-el polimorfismo o los genéricos que permiten, hasta ciertos límites,
-agrupar datos variados en un mismo array.
+Si estuviéramos diseñando un nuevo lenguaje podríamos estar tentados a
+definir algo como:
 
+```swift
+var arrayMisc: [Int | String | Double] = [1, "Hola", 2.0, 3.0, 2]
+```
+
+O sea, que el `arrayMisc` es heterogéneo y puede contener elementos
+`Int` o `String` o `Double`. 
+
+Parece interesante poder expresar algo así. Pero no debe ser una buena
+idea porque no conozco ningún lenguaje que tenga una construcción de
+este tipo. No debe ser una buena idea. Por ejemplo, tendríamos el
+problema de cómo tratar los elementos del array. ¿Qué pasa cuando
+hacemos un bucle y recorremos sus elementos?:
+
+```swift
+for thing in arrayMisc {
+   // procesar el objeto del array
+   // guardado en la variable thing
+}
+```
+
+¿De qué tipo sería la variable `thing`? Podría ser un `Int`, un
+`String` o un `Double`, dependiendo del objeto del array que estuviera
+instanciando. Tendríamos que introducir también alguna construcción en
+el lenguaje para permitir trabajar con los elementos del array
+heterogéneo.
+
+Por suerte no estamos diseñando un lenguaje nuevo, sino que estamos
+estudiando Swift. Vamos a ver que se trata de un lenguaje moderno y
+flexible que proporciona algunas estrategias que permiten, hasta
+ciertos límites, agrupar datos variados en un mismo array.
 
 ## Lenguajes fuertemente tipados
 
