@@ -372,7 +372,8 @@ protocol Nombrable {
 Podemos hacer que los tipos que añadamos al array cumplan esta
 propiedad. Podríamos crear tipos nuevos para los datos que vamos a
 incluir en el array, pero Swift nos permite extender tipos
-existentes:
+existentes `Int`, `String` y `Double` con la propiedad `nombre` y
+hacer que se ajusten al protocolo `Nombrable`:
 
 ```swift
 extension Int: Nombrable {
