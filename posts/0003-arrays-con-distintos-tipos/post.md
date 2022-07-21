@@ -289,7 +289,7 @@ enum Miscelanea {
 }
 ```
 
-Y podemos crear un array de instancia de ese tipo:
+Y podemos crear un array de instancias de ese tipo:
 
 ```swift
 var miArray: [Miscelanea] = [.entero(1), .cadena("Hola"), .real(2.0)]
@@ -324,7 +324,7 @@ podemos añadir nada que no sea algo distinto del enumerado y el
 lenguaje controla correctamente todas las posibles opciones que podemos
 tener en el array.
 
-Pero esta solución tiene algunos problemas. En primer lugar, resulta
+Pero esta solución tiene también algunos problemas. En primer lugar, resulta
 excesivamente rígida. ¿Qué pasa si en el futuro queremos ampliar los
 tipos incluidos en el array? Por ejemplo, añadir datos booleanos. No
 podríamos hacerlo de forma _aditiva_, no podríamos extender las
@@ -332,7 +332,7 @@ funcionalidades del código añadiendo nuevos elementos. Tendríamos que
 reescribir la clase `Miscelanea` para incluir en ella el nuevo tipo y
 recompilar la aplicación.
 
-El segundo problema importante es que esta solución no permite incluir
+El segundo problema es que esta solución no permite incluir
 en el array instancias de estructuras o clases. Supongamos que estamos
 diseñando una aplicación de figuras geométricas y queremos guardar una
 colección con distintos tipos de figuras: rectángulos, cuadrados,
@@ -354,8 +354,10 @@ el array se ajusten a ese protocolo.
 
 En el caso del ejemplo del array de figuras geométricas deberíamos
 buscar alguna propiedad que comparten todas estas figuras y definir un
-protocolo `Figura` con esa propiedad o propiedades al que se ajusten
-rectángulos, cuadrados, triángulos, etc.
+protocolo `Figura` con esa propiedad o propiedades. Los tipos
+concretos `Rectango`, `Cuadrado`, `Triangulo`, etc. deberían entonces
+ajustarse al protocolo `Figura`. Y ya podríamos declarar un array de
+`Figura`s.
 
 Vamos a ver un ejemplo sencillo. Supongamos que todos los ítems que
 guardamos en el array son ítems que tienen un nombre (un
