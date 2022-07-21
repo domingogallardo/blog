@@ -68,62 +68,31 @@ definir algo como:
 var arrayMisc: [Int | String | Double] = [1, "Hola", 2.0, 3.0, 2]
 ```
 
-O sea, que el `arrayMisc` es heterogéneo y puede contener elementos
+O sea, que el `arrayMisc` fuera heterogéneo y pudiera contener elementos
 `Int` o `String` o `Double`. 
 
 Parece interesante poder expresar algo así. Pero no debe ser una buena
 idea porque no conozco ningún lenguaje que tenga una construcción de
-este tipo. No debe ser una buena idea. Por ejemplo, tendríamos el
-problema de cómo tratar los elementos del array. ¿Qué pasa cuando
-hacemos un bucle y recorremos sus elementos?:
+este tipo. Por ejemplo, tendríamos el problema de cómo tratar los
+elementos del array. ¿Qué pasa cuando hacemos un bucle y recorremos
+sus elementos?:
 
 ```swift
 for thing in arrayMisc {
-   // procesar el objeto del array
-   // guardado en la variable thing
+   // procesar el elemento del array
 }
 ```
 
 ¿De qué tipo sería la variable `thing`? Podría ser un `Int`, un
-`String` o un `Double`, dependiendo del objeto del array que estuviera
-instanciando. Tendríamos que introducir también alguna construcción en
-el lenguaje para permitir trabajar con los elementos del array
+`String` o un `Double`, dependiendo del elemento del array que
+estuviera instanciando. Tendríamos que introducir alguna construcción
+en el lenguaje para permitir trabajar con los elementos del array
 heterogéneo.
 
 Por suerte no estamos diseñando un lenguaje nuevo, sino que estamos
 estudiando Swift. Vamos a ver que se trata de un lenguaje moderno y
 flexible que proporciona algunas estrategias que permiten, hasta
 ciertos límites, agrupar datos variados en un mismo array.
-
-## Lenguajes fuertemente tipados
-
-En un lenguaje fuertemente tipado todas las variables, parámetros,
-valores devueltos por las funciones, etc. deben tener un tipo
-perfectamente especificado. Esto tiene muchas ventajas: el compilador
-nos avisa de errores cuando compilamos el programa, el IDE nos
-proporciona pistas al escribirlo y el código resultante es más legible
-y fácil de entender. 
-
-Sin embargo, el hecho de que todo deba tener un tipo predeterminado a
-veces nos quita mucha flexibilidad, nos obliga a escribir código
-excesivamente rígido y repetitivo. Y a veces nos imposibilita hacer
-cosas que harían mucho más sencillo nuestro programa. Por ejemplo,
-guardar instancias de distintos tipos en un array.
-
-Los diseñadores de lenguajes de programación modernos como Swift se
-han dado cuenta de que no es bueno ser excesivamente rígidos y han
-ideado estrategias que flexibilizan el sistema de tipos. Por ejemplo,
-el polimorfismo, la sobrecarga de funciones o los genéricos. Estas
-estrategias, evidentemente, hacen que los lenguajes sean más
-complicados (tanto en su aprendizaje como en el funcionamiento interno
-de los compilador). Pero terminan siendo apreciadas por los
-desarrolladores porque permiten que el código sea más expresivo y
-sencillo.
-
-Vamos a repasar en este artículo un ejemplo concreto de este
-_trade-off_, esta búsqueda de la flexibilidad dentro de un lenguaje
-fuertemente tipado. 
-
 
 ## Lenguajes débilmente tipados ##
 
@@ -171,6 +140,36 @@ ejecución.
 ¿Cuál es el enfoque de Swift, un lenguaje fuertemente tipado? ¿Hay
 alguna forma de guardar instancias de distintos tipos en un array? La
 respuesta es que sí, aunque con ciertas limitaciones. Vamos a verlo.
+
+## Lenguajes fuertemente tipados
+
+En un lenguaje fuertemente tipado todas las variables, parámetros,
+valores devueltos por las funciones, etc. deben tener un tipo
+perfectamente especificado. Esto tiene muchas ventajas: el compilador
+nos avisa de errores cuando compilamos el programa, el IDE nos
+proporciona pistas al escribirlo y el código resultante es más legible
+y fácil de entender. 
+
+Sin embargo, el hecho de que todo deba tener un tipo predeterminado a
+veces nos quita mucha flexibilidad, nos obliga a escribir código
+excesivamente rígido y repetitivo. Y a veces nos imposibilita hacer
+cosas que harían mucho más sencillo nuestro programa. Por ejemplo,
+guardar instancias de distintos tipos en un array.
+
+Los diseñadores de lenguajes de programación modernos como Swift se
+han dado cuenta de que no es bueno ser excesivamente rígidos y han
+ideado estrategias que flexibilizan el sistema de tipos. Por ejemplo,
+el polimorfismo, la sobrecarga de funciones o los genéricos. Estas
+estrategias, evidentemente, hacen que los lenguajes sean más
+complicados (tanto en su aprendizaje como en el funcionamiento interno
+de los compilador). Pero terminan siendo apreciadas por los
+desarrolladores porque permiten que el código sea más expresivo y
+sencillo.
+
+Vamos a repasar en este artículo un ejemplo concreto de este
+_trade-off_, esta búsqueda de la flexibilidad dentro de un lenguaje
+fuertemente tipado. 
+
 
 ## Tipo especial Any
 
