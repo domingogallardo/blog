@@ -465,7 +465,7 @@ type_](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID189). De
 hecho, en SwiftUi una vista es un protocolo genérico que tiene un tipo
 asociado (consultar la referencia al protocolo `View` en la
 [documentación de
-Apple](https://developer.apple.com/documentation/swiftui/view).
+Apple](https://developer.apple.com/documentation/swiftui/view)).
 
 Qué sucede entonces si como tipo del array usamos un protocolo
 genérico, un protocolo que tiene un _associated type_ como una vista
