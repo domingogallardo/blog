@@ -40,8 +40,8 @@ orden inverso. Partir de lo que ya conoces y, a partir de ahí,
 construir y contar lo nuevo.
 
 En nuestro caso, el camino para entender `some` va a empezar con una
-pregunta curiosa: ¿es posible definir un array con datos de distintos
-tipos en un lenguaje fuertemente tipado como Swift? 
+pregunta curiosa: en un lenguaje fuertemente tipado como Swift ¿es
+posible definir un array con datos de distintos tipos?
 
 En principio parece contradictorio. Si hay que especificar de forma
 estricta el tipo del array, debemos especificar el tipo de sus
