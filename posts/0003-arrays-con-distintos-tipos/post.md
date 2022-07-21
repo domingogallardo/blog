@@ -467,11 +467,11 @@ asociado (consultar la referencia al protocolo `View` en la
 [documentación de
 Apple](https://developer.apple.com/documentation/swiftui/view)).
 
-Qué sucede entonces si como tipo del array usamos un protocolo
-genérico, un protocolo que tiene un _associated type_ como una vista
-de SwiftUI? Pues resulta que todo se hace un poco más
-complicado. Bueno, no solo un poco, bastante más complicado. Tanto que
-mejor lo dejamos para otro post.
+¿Qué sucede entonces si como tipo del array usamos un protocolo
+genérico, un protocolo que tiene un _associated type_? ¿Qué sucede si
+creamos un array de vistas de SwiftUI? Pues resulta que todo se hace
+un poco más complicado. El compilador da un error. ¿Por qué? Mejor lo
+dejamos para otro post.
 
 ## Referencias ##
 
