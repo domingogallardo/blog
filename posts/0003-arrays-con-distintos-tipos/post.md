@@ -137,10 +137,6 @@ Es el problema de los lenguajes débilmente tipados. El compilador no
 puede detectar muchos errores y éstos se producen en tiempo de
 ejecución.
 
-¿Cuál es el enfoque de Swift, un lenguaje fuertemente tipado? ¿Hay
-alguna forma de guardar instancias de distintos tipos en un array? La
-respuesta es que sí, aunque con ciertas limitaciones. Vamos a verlo.
-
 ## Lenguajes fuertemente tipados
 
 En un lenguaje fuertemente tipado todas las variables, parámetros,
@@ -153,8 +149,9 @@ y fácil de entender.
 Sin embargo, el hecho de que todo deba tener un tipo predeterminado a
 veces nos quita mucha flexibilidad, nos obliga a escribir código
 excesivamente rígido y repetitivo. Y a veces nos imposibilita hacer
-cosas que harían mucho más sencillo nuestro programa. Por ejemplo,
-guardar instancias de distintos tipos en un array.
+cosas que harían mucho más sencillo nuestro programa. Por ejemplo, la
+idea que estamos explorando de guardar instancias de distintos tipos
+en un array.
 
 Los diseñadores de lenguajes de programación modernos como Swift se
 han dado cuenta de que no es bueno ser excesivamente rígidos y han
@@ -166,17 +163,19 @@ de los compilador). Pero terminan siendo apreciadas por los
 desarrolladores porque permiten que el código sea más expresivo y
 sencillo.
 
-Vamos a repasar en este artículo un ejemplo concreto de este
-_trade-off_, esta búsqueda de la flexibilidad dentro de un lenguaje
-fuertemente tipado. 
+Podemos ver el problema que estamos tratando en este artículo como un
+ejemplo concreto de este _trade-off_, de esta búsqueda de la
+flexibilidad dentro de un lenguaje fuertemente tipado.
 
+Vamos ya a explicar las distintas formas que proporciona Swift para
+resolver la pregunta principal que nos estamos planteando.
 
 ## Tipo especial Any
 
 El [tipo especial
 `Any`](https://docs.swift.org/swift-book/ReferenceManual/Types.html#ID629)
-permite que la variable declarada sea de cualquier tipo. Por ejemplo,
-podemos decir:
+permite que una variable sea de cualquier tipo. Por ejemplo,
+podemos declarar una variable con un entero y después asignarle una cadena:
 
 ```swift
 var x: Any = 10
@@ -213,7 +212,7 @@ El operador `as!` devuelve el valor con el tipo indicado. Si la
 variable no es compatible con ese tipo se produce un error en tiempo
 de ejecución. 
 
-## Array de Anys
+## Arrays de Anys
 
 Entonces, una primera forma de permitir arrays con múltiples tipos es
 usar el tipo especial  `Any`.
@@ -259,10 +258,13 @@ Una cadena con valor de "Hola"
 Un double con valor de 3.0
 ```
 
-¿Cuál es el inconveniente? Precisamente el tener que hacer el
-downcasting. Hace que el código sea más confuso y más propenso a
-errores, al usar el operador `as!` que puede hacer que el programa se
-rompa en tiempo de ejecución. 
+Parece que ya tenemos una estrategia que resuelve nuestro
+problema. ¿Cuál es su inconveniente? Precisamente el tener que hacer
+el _downcasting_ y su excesiva libertad. El _downcasting_ hace que el
+código sea algo más confuso. Y el poder guardar cualquier cosa en el
+array hace el código más propenso a errores. Los desarrolladores
+pueden verse tentados a usar el operador `as!` y hacer el código menos
+robusto y más propenso a romperse en tiempo de ejecución.
 
 ## Arrays con enumerados con tipos asociados ##
 
@@ -343,7 +345,7 @@ triángulos, etc. No podríamos hacerlo.
 
 Esto nos lleva a la siguiente solución.
 
-## Array de un tipo protocolo
+## Arrays de un tipo protocolo
 
 Otra solución, más flexible, para guardar tipos distintos en un array
 es usar un
