@@ -268,11 +268,6 @@ robusto y más propenso a romperse en tiempo de ejecución.
 
 ## Arrays con enumerados con tipos asociados ##
 
-Un problema de la solución anterior era que el tipo `Any` permite una
-libertad excesiva y nos lleva a problemas similares a los de los
-lenguajes débilmente tipados. El hecho de que en el array podamos
-incluir _cualquier_ tipo nos puede dar problemas. 
-
 ¿Podríamos limitar los tipos a incluir en el array a unos
 determinados? Supongamos, por ejemplo, que sólo necesito que en mi
 array hayan enteros, cadenas y números reales. ¿Existe alguna
