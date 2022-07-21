@@ -56,9 +56,10 @@ deben ser de tipo `Int`. Podríamos definir otros arrays distintos, con
 objetos de tipo `String` o de tipo `Double`. Pero en cada caso los
 arrays serían homogéneos y todos sus elementos tendrían el mismo tipo.
 
-¿Es siempre así en Swift? Parece demasiado rígido. Podría ser que
-necesitáramos guardar en un único array números enteros, cadenas y
-números reales. 
+¿Es siempre así en Swift? Parece demasiado rígido. Podría ser que para
+resolver un determinado problema la solución más sencilla pasara por
+guardar en un único array tanto números enteros como cadenas y números
+reales.
 
 Si estuviéramos diseñando un nuevo lenguaje podríamos estar tentados a
 definir algo como:
