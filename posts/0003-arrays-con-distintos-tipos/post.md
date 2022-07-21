@@ -35,11 +35,9 @@ caso por resolver, como si fuera una especie de Sherlock Holmes o
 Hercules Poirot. Una pregunta me lleva a otra y esta a otra, y así
 hasta que al final termino desenredando el ovillo (o parte de él) y
 conectando todos los conceptos nuevos que voy encontrando con los que
-ya conozco.
-
-Después, para explicarlo, toca hacer el camino en orden
-inverso. Partir de lo que ya conoces y llegar a partir de ahí a lo
-nuevo que quieres contar.
+ya conozco. Y después, cuando explicas algo, toca hacer el camino en
+orden inverso. Partir de lo que ya conoces y, a partir de ahí,
+construir y contar lo nuevo.
 
 En nuestro caso, el camino para entender `some` va a empezar con una
 pregunta curiosa: ¿es posible definir un array con datos de distintos
